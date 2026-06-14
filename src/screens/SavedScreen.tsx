@@ -22,10 +22,10 @@ export function SavedScreen({ onOk, onNewImage, onClose }: SavedScreenProps) {
       <View style={styles.content}>
         <DialogBox title="BORDR">
           <Text style={styles.heading}>SAVED</Text>
-          <Text style={styles.message}>{'Image saved to\nCamera Roll'}</Text>
+          <Text style={styles.message}>{'Photo saved to\nCamera Roll'}</Text>
           <View style={styles.buttons}>
             <RetroButton label="OK" onPress={onOk} style={styles.okBtn} fontSize={15} />
-            <RetroButton label="NEW IMAGE" onPress={onNewImage} fontSize={15} />
+            <RetroButton label="NEW EDIT" onPress={onNewImage} fontSize={15} />
           </View>
         </DialogBox>
       </View>

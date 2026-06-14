@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { TitleBar } from '../components/TitleBar';
 import { MenuBar } from '../components/MenuBar';
 import { StatusBar } from '../components/StatusBar';
@@ -50,7 +50,11 @@ export function FileBrowser({ onClose, onSelectFile }: FileBrowserProps) {
                 }}
               >
                 <View style={[styles.fileThumbnail, { backgroundColor: edit.backdropColor }]}>
-                  <View style={styles.filePhoto} />
+                  <Image
+                    source={{ uri: edit.originalUri }}
+                    style={styles.filePhoto}
+                    resizeMode="cover"
+                  />
                 </View>
                 <Text
                   style={[styles.fileName, selectedId === edit.id && styles.fileNameSelected]}
@@ -126,19 +130,19 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   fileItem: {
-    width: '30%',
+    width: '31%',
     alignItems: 'center',
-    gap: 4,
-    padding: 4,
+    gap: 6,
+    padding: 6,
   },
   fileThumbnail: {
-    width: 44,
-    height: 44,
+    width: 80,
+    height: 80,
     borderWidth: 1,
     borderColor: colors.menuBorder,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 4,
+    padding: 6,
   },
   filePhoto: {
     width: '100%',
@@ -147,7 +151,7 @@ const styles = StyleSheet.create({
   },
   fileName: {
     fontFamily: fonts.heading,
-    fontSize: 11,
+    fontSize: 15,
     color: '#333333',
     textAlign: 'center',
   },
