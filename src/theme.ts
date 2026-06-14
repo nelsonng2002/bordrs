@@ -7,6 +7,7 @@ export const colors = {
   lightGray: '#e0e0e0',
   white: '#ffffff',
   black: '#000000',
+  shinyGold: '#ffd84d',
   borderLight: '#ffffff',
   borderDark: '#555555',
   menuBorder: '#888888',
