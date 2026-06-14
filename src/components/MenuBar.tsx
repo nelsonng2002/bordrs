@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     borderBottomWidth: 1,
     borderBottomColor: colors.menuBorder,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     flexDirection: 'row',
     gap: 12,
   },
   item: {
     fontFamily: fonts.heading,
-    fontSize: 15,
+    fontSize: 20,
     color: '#111111',
   },
   activeItem: {

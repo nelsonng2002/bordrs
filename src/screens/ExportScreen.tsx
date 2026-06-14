@@ -29,7 +29,7 @@ export function ExportScreen({
   return (
     <View style={styles.container}>
       <TitleBar title="BORDR.EXE" />
-      <MenuBar items={[{ label: 'File' }, { label: 'Size' }, { label: 'Export' }]} />
+      <MenuBar items={[{ label: 'File', onPress: onCancel }, { label: 'Size' }, { label: 'Export' }]} />
 
       <View style={styles.content}>
         <View style={styles.thumbnailContainer}>

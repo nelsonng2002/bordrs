@@ -39,3 +39,43 @@ Testing is done manually on device via Expo Go. There are no automated tests.
 **Key types** (`src/types.ts`):
 - `EditorState` — the live editing session (imageUri, imageWidth/Height, format, borderWidth, backdropColor)
 - `SavedEdit` — persisted record including original URI and exported URI
+
+## File Map
+
+### Root
+- `App.tsx` — App entry point. Owns `screen` state, `editorState`, `exportedUri`, and `exportViewRef`. Defines all cross-screen callbacks and conditionally renders screens.
+- `index.ts` — Expo entry point; registers App component.
+- `app.json` — Expo config (name, slug, icons, permissions).
+
+### `src/`
+- `src/types.ts` — All shared TypeScript types: `Format` (`'1:1'|'4:5'|'9:16'`), `Screen`, `EditorState`, `SavedEdit`.
+- `src/constants.ts` — `EGA_PALETTE` (8 colors), `FORMATS` (pixel dimensions + labels per format), `BORDER_MIN/MAX/STEP/DEFAULT`.
+- `src/theme.ts` — Design tokens: `colors`, `fonts`, and Win95-style border presets `raised`/`pressed`/`inset` (spread these into StyleSheet styles, never inline border properties).
+
+### `src/screens/`
+- `EditorScreen.tsx` — Main editing view. Shows live bordered preview (the `exportViewRef` view), format picker (1:1/4:5/9:16), border width stepper, and `ColorGrid` for backdrop. Scales preview to fit screen while computing pixel-perfect border for export.
+- `HomeScreen.tsx` — Landing screen with "SELECT PHOTO..." button and file browser access.
+- `ExportScreen.tsx` — Shows thumbnail of captured image with "Save to Camera Roll" / "Copy to Clipboard" / "Cancel" actions inside a `DialogBox`.
+- `SavedScreen.tsx` — Confirmation screen shown after successful save. Has "OK" (back to editor) and "NEW IMAGE" (back to home) buttons.
+- `FileBrowser.tsx` — Win95-style file browser listing all `SavedEdit` records from AsyncStorage. Tapping a file calls `onSelectFile` to reload that edit into the editor.
+
+### `src/hooks/`
+- `useImagePicker.ts` — `pickImage()`: launches `expo-image-picker`, returns `{uri, filename, width, height}` or null.
+- `useExport.ts` — Three async functions: `captureExport(viewRef, format)` captures the view via `react-native-view-shot` at full Instagram resolution; `saveToCameraRoll(uri)` saves via `expo-media-library`; `copyToClipboard(uri)` copies via `expo-clipboard`.
+
+### `src/utils/`
+- `storage.ts` — AsyncStorage helpers keyed to `'bordr_saved_edits'`: `getSavedEdits()`, `saveEdit(edit)` (prepends), `deleteEdit(id)`.
+
+### `src/components/`
+- `TitleBar.tsx` — Navy bar with title and optional `×` close button (renders `▫` if no `onClose` prop).
+- `MenuBar.tsx` — Horizontal row of text menu items; items without `onPress` are non-interactive.
+- `StatusBar.tsx` — Footer bar with optional left/right text labels.
+- `RetroButton.tsx` — Win95 push button with press animation toggling `raised`/`pressed` theme borders. Supports `active` prop for toggle state.
+- `ColorGrid.tsx` — Horizontal wrap of 28×28 color swatches from `EGA_PALETTE`. Selected swatch gets a thick border.
+- `DialogBox.tsx` — Navy title bar + silver content area with `raised` border; wraps arbitrary children.
+
+### `assets/`
+- `fonts/VT323-Regular.ttf` — Pixel/retro display font, used for all headings (`fonts.heading`).
+- `fonts/IBMPlexMono-Regular.ttf` — Monospace font, used for body text (`fonts.body`).
+- `icon.png`, `splash-icon.png`, `favicon.png` — App icons.
+- `android-icon-background.png`, `android-icon-foreground.png`, `android-icon-monochrome.png` — Adaptive Android icon layers.

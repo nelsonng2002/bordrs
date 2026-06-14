@@ -25,20 +25,20 @@ export function TitleBar({ title, onClose }: TitleBarProps) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.navy,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   title: {
     fontFamily: fonts.heading,
-    fontSize: 16,
+    fontSize: 22,
     color: colors.white,
   },
   icon: {
     fontFamily: fonts.heading,
-    fontSize: 14,
+    fontSize: 20,
     color: colors.white,
   },
 });

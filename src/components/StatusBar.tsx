@@ -21,15 +21,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGray,
     borderTopWidth: 1,
     borderTopColor: colors.menuBorder,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   text: {
     fontFamily: fonts.heading,
-    fontSize: 13,
+    fontSize: 18,
     color: '#555555',
   },
 });
