@@ -23,11 +23,10 @@ export function HomeScreen({ onSelectPhoto, onOpenFiles }: HomeScreenProps) {
         ]}
       />
       <View style={styles.content}>
-        <Text style={styles.title}>BORDR</Text>
-        <Text style={styles.subtitle}>{'borders for your\nphotos. that\'s it.'}</Text>
         <View style={styles.iconContainer}>
-          <View style={styles.iconInner} />
+          <Text style={styles.title}>BORDR</Text>
         </View>
+        <Text style={styles.subtitle}>{'borders for your\nphotos. that\'s it.'}</Text>
         <RetroButton label="SELECT PHOTO..." onPress={onSelectPhoto} style={styles.button} />
       </View>
       <StatusBar left="Ready." />
@@ -61,17 +60,12 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   iconContainer: {
-    width: 72,
-    height: 72,
+    width: 148,
+    height: 148,
     borderWidth: 3,
     borderColor: '#111111',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  iconInner: {
-    width: 44,
-    height: 44,
-    backgroundColor: '#bbbbbb',
   },
   button: {
     width: '100%',

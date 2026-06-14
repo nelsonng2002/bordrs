@@ -15,6 +15,7 @@ interface ExportScreenProps {
   onSaveToCameraRoll: () => void;
   onCopyToClipboard: () => void;
   onCancel: () => void;
+  onGoHome: () => void;
 }
 
 export function ExportScreen({
@@ -23,13 +24,14 @@ export function ExportScreen({
   onSaveToCameraRoll,
   onCopyToClipboard,
   onCancel,
+  onGoHome,
 }: ExportScreenProps) {
   const formatInfo = FORMATS[state.format];
 
   return (
     <View style={styles.container}>
       <TitleBar title="BORDR.EXE" />
-      <MenuBar items={[{ label: 'File', onPress: onCancel }, { label: 'Size' }, { label: 'Export' }]} />
+      <MenuBar items={[{ label: 'File', onPress: onGoHome }, { label: 'Size' }, { label: 'Export' }]} />
 
       <View style={styles.content}>
         <View style={styles.thumbnailContainer}>

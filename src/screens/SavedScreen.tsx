@@ -10,12 +10,13 @@ import { colors, fonts } from '../theme';
 interface SavedScreenProps {
   onOk: () => void;
   onNewImage: () => void;
+  onClose: () => void;
 }
 
-export function SavedScreen({ onOk, onNewImage }: SavedScreenProps) {
+export function SavedScreen({ onOk, onNewImage, onClose }: SavedScreenProps) {
   return (
     <View style={styles.container}>
-      <TitleBar title="BORDR.EXE" />
+      <TitleBar title="BORDR.EXE" onClose={onClose} />
       <MenuBar items={[{ label: 'File' }, { label: 'Size' }, { label: 'Export' }]} />
 
       <View style={styles.content}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, StatusBar } from 'react-native';
 import { colors, fonts } from '../theme';
 
 interface TitleBarProps {
@@ -12,7 +12,7 @@ export function TitleBar({ title, onClose }: TitleBarProps) {
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {onClose ? (
-        <TouchableOpacity onPress={onClose}>
+        <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
           <Text style={styles.icon}>×</Text>
         </TouchableOpacity>
       ) : (
@@ -22,11 +22,14 @@ export function TitleBar({ title, onClose }: TitleBarProps) {
   );
 }
 
+const topInset = Platform.OS === 'ios' ? 44 : StatusBar.currentHeight ?? 0;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.navy,
     paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingTop: topInset + 6,
+    paddingBottom: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -40,5 +43,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.heading,
     fontSize: 20,
     color: colors.white,
+  },
+  closeBtn: {
+    padding: 8,
   },
 });

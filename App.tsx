@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { View, StyleSheet, SafeAreaView, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { HomeScreen } from './src/screens/HomeScreen';
@@ -23,6 +23,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('home');
   const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [exportedUri, setExportedUri] = useState<string | null>(null);
+  const [fileBrowserOrigin, setFileBrowserOrigin] = useState<'home' | 'editor'>('home');
   const exportViewRef = useRef<View>(null);
 
   const handleSelectPhoto = useCallback(async () => {
@@ -96,12 +97,12 @@ export default function App() {
   if (!fontsLoaded) return null;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar style="light" />
       {screen === 'home' && (
         <HomeScreen
           onSelectPhoto={handleSelectPhoto}
-          onOpenFiles={() => setScreen('fileBrowser')}
+          onOpenFiles={() => { setFileBrowserOrigin('home'); setScreen('fileBrowser'); }}
         />
       )}
       {screen === 'editor' && editorState && (
@@ -110,7 +111,7 @@ export default function App() {
           onUpdateState={(updates) => setEditorState((s) => (s ? { ...s, ...updates } : s))}
           onClose={() => setScreen('home')}
           onExport={handleExport}
-          onOpenFiles={() => setScreen('fileBrowser')}
+          onOpenFiles={() => { setFileBrowserOrigin('editor'); setScreen('fileBrowser'); }}
           captureRef={exportViewRef}
         />
       )}
@@ -121,21 +122,23 @@ export default function App() {
           onSaveToCameraRoll={handleSaveToCameraRoll}
           onCopyToClipboard={handleCopyToClipboard}
           onCancel={() => setScreen('editor')}
+          onGoHome={() => setScreen('home')}
         />
       )}
       {screen === 'saved' && (
         <SavedScreen
           onOk={() => setScreen('editor')}
           onNewImage={() => setScreen('home')}
+          onClose={() => setScreen('home')}
         />
       )}
       {screen === 'fileBrowser' && (
         <FileBrowser
-          onClose={() => setScreen(editorState ? 'editor' : 'home')}
+          onClose={() => setScreen(fileBrowserOrigin)}
           onSelectFile={handleFileSelect}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 }
 
