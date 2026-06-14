@@ -45,7 +45,6 @@ export function ExportScreen({
 
         <DialogBox title="Save As">
           <RetroButton label="SAVE TO CAMERA ROLL" onPress={onSaveToCameraRoll} fontSize={15} />
-          <RetroButton label="COPY TO CLIPBOARD" onPress={onCopyToClipboard} fontSize={15} />
           <RetroButton label="CANCEL" onPress={onCancel} fontSize={15} />
         </DialogBox>
       </View>

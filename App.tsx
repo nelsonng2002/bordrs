@@ -55,8 +55,8 @@ export default function App() {
 
   const handleSaveToCameraRoll = useCallback(async () => {
     if (!exportedUri || !editorState) return;
-    const success = await saveToCameraRoll(exportedUri);
-    if (success) {
+    const result = await saveToCameraRoll(exportedUri);
+    if (result.success) {
       await saveEdit({
         id: Date.now().toString(),
         originalUri: editorState.imageUri,
@@ -71,7 +71,7 @@ export default function App() {
       });
       setScreen('saved');
     } else {
-      Alert.alert('BORDR', 'Could not save. Check photo library permissions.');
+      Alert.alert('BORDR', `Could not save. ${result.error ?? 'Check photo library permissions.'}`);
     }
   }, [exportedUri, editorState]);
 
